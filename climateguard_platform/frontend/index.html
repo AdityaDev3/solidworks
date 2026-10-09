@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#071410" />
+  <title>ClimateGuard · Regional early warning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#top" aria-label="ClimateGuard home"><span class="brand-mark">C<span>G</span></span><span><b>climateguard</b><small>CLIMATE · HEALTH · ACTION</small></span></a>
+      <div class="side-caption">WORKSPACE</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav-item active" href="#top"><span class="nav-icon">◈</span>Overview</a>
+        <a class="nav-item" href="#map-panel"><span class="nav-icon">⌖</span>District map</a>
+        <a class="nav-item" href="#trends"><span class="nav-icon">⌁</span>Climate & cases</a>
+        <a class="nav-item" href="#signals"><span class="nav-icon">◌</span>Environmental signals</a>
+        <a class="nav-item" href="#sources"><span class="nav-icon">▤</span>Data sources</a>
+      </nav>
+      <div class="sidebar-rule"></div>
+      <div class="side-caption">YOUR REGION</div>
+      <label class="side-label" for="location-select">Focus area</label>
+      <select id="location-select" class="select side-select"><option value="">Load a district boundary first</option></select>
+      <div class="sidebar-bottom">
+        <div class="local-chip"><i></i><span>LOCAL DATA PIPELINE</span></div>
+        <p>Predictions run on this server. Source time, geography and missing data stay visible.</p>
+        <button class="button button-quiet full" id="open-admin">⚙ &nbsp; Data setup</button>
+        <div class="sidebar-foot">PROTOTYPE 02.0 <span>·</span> RESEARCH USE</div>
+      </div>
+    </aside>
+
+    <main id="top" class="main">
+      <header class="topbar">
+        <div class="crumb"><span>Climate intelligence</span><b>/</b><strong>Overview</strong></div>
+        <div class="top-actions">
+          <span class="api-pill" id="api-status"><i></i><span>Connecting to API</span></span>
+          <button class="icon-button" id="refresh" aria-label="Refresh dashboard" title="Refresh">↻</button>
+          <button class="user-chip" id="open-admin-top"><span class="avatar">CG</span><span>Local workspace</span><span class="chevron">⌄</span></button>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="welcome-row">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> CLIMATE-SENSITIVE DISEASE EARLY WARNING</div><h1>Good morning<span class="title-dot">.</span></h1><p class="page-subtitle">A grounded view of environmental and disease signals across your selected area.</p></div>
+          <div class="date-card"><span class="date-glyph">◷</span><span><small>DATA THROUGH</small><b id="data-through">Waiting for observations</b></span></div>
+        </section>
+
+        <section class="hero-grid">
+          <article class="risk-card panel" id="risk-panel">
+            <div class="risk-card-head"><span class="card-kicker">NEXT-FOUR-WEEK OUTLOOK</span><span class="forecast-tag" id="forecast-tag"><i></i> MODEL NOT TRAINED</span></div>
+            <div class="risk-main">
+              <div><div class="risk-number" id="risk-score">—<span>%</span></div><div class="risk-context" id="risk-context">A forecast will appear after valid historical data are ready.</div></div>
+              <div class="risk-orbit" aria-hidden="true"><div class="orbit orbit-outer"></div><div class="orbit orbit-inner"></div><div class="orbit-core">◉</div><div class="orbit-point"></div></div>
+            </div>
+            <div class="risk-meter"><span id="risk-meter-fill"></span></div>
+            <div class="risk-foot"><span id="risk-level">No validated estimate</span><span id="risk-horizon">Next four weeks · dengue</span></div>
+            <div class="risk-explainer" id="risk-explanation">No disease risk is inferred from climate alone. Predictions remain unavailable until compatible case and climate history passes training checks.</div>
+          </article>
+          <article class="map-card panel" id="map-panel">
+            <div class="panel-heading"><div><span class="card-kicker">GEOGRAPHIC COVERAGE</span><h2>District landscape</h2></div><button class="text-action" id="load-boundaries">Load India map <span>↗</span></button></div>
+            <div class="map-stage"><svg id="india-map" viewBox="0 0 570 360" role="img" aria-label="District boundary map; data not loaded"><g id="map-shapes"></g><g id="map-markers"></g></svg><div id="map-empty" class="map-empty"><span>⌖</span><b>No boundaries loaded yet</b><small>Load the current India ADM2 boundary layer to explore districts.</small></div><div class="map-legend"><i></i> Registered districts <span>·</span> neutral map</div></div>
+            <div class="map-footer"><span><b id="district-count">0</b> districts in workspace</span><span class="boundary-vintage" id="boundary-vintage">Boundary vintage: not loaded</span></div>
+          </article>
+        </section>
+
+        <section class="metric-grid" aria-label="Selected location indicators">
+          <article class="metric-card panel"><div class="metric-top"><span class="metric-icon mint">☁</span><span class="metric-label">RAINFALL · 28 DAYS</span><span class="metric-source">POWER</span></div><div class="metric-value" id="metric-rain">—<small> mm</small></div><div class="metric-foot" id="metric-rain-foot">No matching observation window</div></article>
+          <article class="metric-card panel"><div class="metric-top"><span class="metric-icon amber">⌁</span><span class="metric-label">MEAN TEMPERATURE</span><span class="metric-source">POWER</span></div><div class="metric-value" id="metric-temp">—<small> °C</small></div><div class="metric-foot" id="metric-temp-foot">Previous 28 observed days</div></article>
+          <article class="metric-card panel"><div class="metric-top"><span class="metric-icon blue">◌</span><span class="metric-label">REPORTED CASES</span><span class="metric-source">DENGUE</span></div><div class="metric-value" id="metric-cases">—<small> / week</small></div><div class="metric-foot" id="metric-cases-foot">Latest source reporting interval</div></article>
+          <article class="metric-card panel"><div class="metric-top"><span class="metric-icon violet">♙</span><span class="metric-label">POPULATION DENSITY</span><span class="metric-source">WORLDPOP</span></div><div class="metric-value" id="metric-pop">—<small> / km²</small></div><div class="metric-foot" id="metric-pop-foot">Annual estimate · year unavailable</div></article>
+        </section>
+
+        <section class="two-col" id="trends">
+          <article class="panel chart-panel"><div class="panel-heading"><div><span class="card-kicker">OBSERVED HISTORY</span><h2>Dengue reports & rainfall</h2></div><div class="chart-key"><span><i class="key-cases"></i>Reported cases</span><span><i class="key-rain"></i>Rainfall</span></div></div><div class="chart-wrap"><svg id="history-chart" viewBox="0 0 780 245" preserveAspectRatio="none" role="img" aria-label="Observed case and rainfall history"><g id="chart-grid"></g><g id="chart-lines"></g></svg><div id="chart-empty" class="chart-empty">Import compatible source records to see observed trends.</div></div><div class="chart-foot"><span id="chart-period">No compatible observations loaded</span><span>Case periods are not upsampled or treated as forecasts.</span></div></article>
+          <article class="panel model-panel"><div class="panel-heading"><div><span class="card-kicker">MODEL STATUS</span><h2>Forecast quality</h2></div><span class="model-state" id="model-state">Unavailable</span></div><div class="model-summary" id="model-summary">No model has been trained from this workspace’s genuine disease and weather observations.</div><div class="quality-list"><div><span>Chronological holdout</span><b id="model-split">—</b></div><div><span>Precision–recall AUC</span><b id="model-prauc">—</b></div><div><span>Brier score</span><b id="model-brier">—</b></div><div><span>Trained through</span><b id="model-date">—</b></div></div><div class="model-notice">A high metric is not proof of outbreak prediction skill. Compare against the training-derived baseline and review source coverage.</div><button class="button button-outline full" id="train-model">Train / refresh model</button></article>
+        </section>
+
+        <section class="signal-section" id="signals"><div class="section-head"><div><span class="card-kicker">BEYOND THE WEATHER</span><h2>Environmental signal coverage</h2></div><span class="section-note">Missing sources stay missing; proxies are never labelled as observations.</span></div><div id="signal-grid" class="signal-grid"></div></section>
+
+        <section class="panel sources-panel" id="sources"><div class="panel-heading"><div><span class="card-kicker">PROVENANCE & FRESHNESS</span><h2>Data source registry</h2></div><button class="text-action" id="refresh-sources">Refresh registry <span>↻</span></button></div><div class="table-scroll"><table><thead><tr><th>Source</th><th>Category</th><th>Coverage / availability</th><th>Latest observation</th><th>Status</th></tr></thead><tbody id="source-rows"><tr><td colspan="5" class="table-empty">Source registry is loading.</td></tr></tbody></table></div></section>
+
+        <footer class="footnote"><span>CLIMATEGUARD <i>·</i> LOCAL RESEARCH PROTOTYPE</span><span>Early-warning estimates only · not a diagnosis or official outbreak alert</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="admin-dialog" class="admin-dialog"><form method="dialog" class="dialog-close-row"><button class="icon-button" aria-label="Close setup">×</button></form><div class="dialog-content"><div class="eyebrow"><span class="eyebrow-line"></span> PIPELINE CONTROL</div><h2>Connect your data</h2><p class="dialog-lede">Import observations into your local backend. Admin credentials stay in this browser tab and are sent only to your configured API.</p><label class="field-label" for="admin-token">Backend admin key</label><input id="admin-token" type="password" autocomplete="off" placeholder="Set ADMIN_TOKEN in backend/.env" class="text-input"/><div class="dialog-grid"><button class="button button-outline" id="sync-boundaries">① Load India ADM2 boundaries</button><button class="button button-outline" id="sync-weather">② Fetch 4 years of NASA POWER</button><button class="button button-outline" id="sync-population">③ Fetch WorldPop estimate</button><button class="button button-outline" id="sync-opendengue">④ Import OpenDengue extract</button><button class="button button-outline" id="upload-crosswalk">Upload district crosswalk CSV</button><button class="button button-outline" id="upload-satellite">Import processed satellite/water/vector CSV</button></div><input id="crosswalk-file" type="file" accept=".csv,text/csv" hidden/><input id="satellite-file" type="file" accept=".csv,text/csv" hidden/><div class="progress-message" id="admin-message" role="status"></div><div class="dialog-tip"><b>Need the dengue crosswalk?</b> Use the loaded geoBoundaries IDs, then map OpenDengue’s exact admin0/admin1/admin2 names to those IDs. The importer will not guess name matches. NASA MODIS exports need valid quality flags; not every product is a daily observation.</div></div></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
