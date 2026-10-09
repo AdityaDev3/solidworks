@@ -1,0 +1,13 @@
+# Local runtime, secrets, and generated files
+.env
+**/.env
+**/.venv/
+**/venv/
+**/__pycache__/
+**/.pytest_cache/
+**/*.sqlite3
+**/*.db
+**/.streamlit/secrets.toml
+
+# Installed third-party desktop application bundled beside the project
+/IrfanView/

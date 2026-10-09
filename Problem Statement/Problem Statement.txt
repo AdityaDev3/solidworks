@@ -1,0 +1,4 @@
+Climate-Informed Disease Outbreak Prediction
+CONFIRMED & LOCKED
+CHALLENGE DESCRIPTION & OBJECTIVES
+Weather and climate conditions influence the incidence and geographical distribution of several diseases. WHO supports climate-informed disease early-warning approaches, but integrating environmental, epidemiological and population signals at local scale remains challenging. Expected Solution: Develop a climate-health intelligence platform combining weather, satellite environmental observations, disease surveillance, population density, mobility, water availability and vector/environmental indicators. Generate localized outbreak probabilities weeks in advance and explain the environmental drivers. Dataset / Reference: WorldPop: https://www.worldpop.org/ OpenDengue — A global dataset of publicly available dengue case count data: https://www.nature.com/articles/s41597-024-03120-7
