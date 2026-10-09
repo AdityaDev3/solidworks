@@ -26,7 +26,8 @@ initialize()
 app = FastAPI(title="ClimateGuard Data & Risk API", version="2.0.0",
               description="Regional climate-health prototype. Model estimates are not public-health declarations or medical advice.")
 origins = [v.strip() for v in os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if v.strip()]
-app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET","POST"], allow_headers=["Authorization","Content-Type"])
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET","POST"],
+                   allow_headers=["Authorization","Content-Type","X-Admin-Token","X-WorldPop-API-Key"])
 CATEGORIES = {"rainfall","temperature_mean","temperature_max","temperature_min","humidity","dengue_cases",
               "population_count","ndvi","evi","land_surface_temperature","surface_water_occurrence",
               "water_level","mobility_index","vector_count","vector_larval_index","land_cover"}
