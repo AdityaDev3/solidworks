@@ -1,5 +1,7 @@
 # ClimateGuard prototype
 
+For the new, separate FastAPI + dynamic frontend implementation, follow the [ClimateGuard Platform quick start](climateguard_platform/README.md). The new work is developed on branch `climateguard-platform`.
+
 The repository includes a FastAPI ingestion/data API and the existing Streamlit research prototype under [climateguard_mvp](climateguard_mvp/README.md), plus the pre-existing static AarogyaSight dashboard under [Frontend](Frontend/aarogyasight-html-css-js/aarogyasight/README.md).
 
 Start with [the project audit](climateguard_mvp/docs/PROJECT_AUDIT.md), then follow [API setup and examples](climateguard_mvp/docs/API.md). The frontend's established styles and page structure remain. It reports backend/source state when the API is available and clearly labels its static preview values as demo data.
